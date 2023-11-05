@@ -22,14 +22,11 @@ maintainer: "Daniel Bünzli <daniel.buenzl i@erratique.ch>"
 authors: "The uuseg programmers"
 license: "ISC"
 tags: ["unicode" "text" "segmentation" "org:erratique"]
-homepage: "https://erratique.ch/software/uuseg"
-doc: "https://erratique.ch/software/uuseg/doc/"
-bug-reports: "https://github.com/dbuenzli/uuseg/issues"
+homepage: "https://github.com/dune-universe/uuseg"
+bug-reports: "https://github.com/dbuenzli/uucp/issues"
 depends: [
   "ocaml" {>= "4.14.0"}
-  "ocamlfind" {build}
-  "ocamlbuild" {build}
-  "topkg" {build & >= "1.0.3"}
+  "dune" {>= "1.10"}
   "uucp" {>= "15.1.0" & < "16.0.0"}
 ]
 depopts: ["uutf" "cmdliner"]
@@ -37,15 +34,5 @@ conflicts: [
   "uutf" {< "1.0.0"}
   "cmdliner" {< "1.1.0"}
 ]
-build: [
-  "ocaml"
-  "pkg/pkg.ml"
-  "build"
-  "--dev-pkg"
-  "%{dev}%"
-  "--with-uutf"
-  "%{uutf:installed}%"
-  "--with-cmdliner"
-  "%{cmdliner:installed}%"
-]
-dev-repo: "git+https://erratique.ch/repos/uuseg.git"
+build: [ "dune" "build" "-p" name "-j" jobs ]
+dev-repo: "git+https://github.com/dune-universe/uuseg.git"
